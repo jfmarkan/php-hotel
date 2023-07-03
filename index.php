@@ -49,17 +49,6 @@
 </head>
 <body>
     <div class="container">
-        <h3>
-            <?php
-                if ( empty($_GET['parking'])
-                && empty($_GET['vote'])){
-                    echo 'All our offers';
-                } else {
-                    echo 'Search result';
-                }
-            ?>
-        </h3>
-
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -71,7 +60,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 <?php foreach ($hotels as $singleHotel) { ?>
                     <tr>
                         <th scope="row">
