@@ -36,6 +36,10 @@
             'distance_to_center' => 50
         ],
     ];
+
+    $hasParking = $_GET['parking'];
+    $vote = $_GET['vote'];
+    $hotelSearch = array();
 ?>
 
 <!DOCTYPE html>
@@ -49,17 +53,29 @@
 </head>
 <body>
     <div class="container">
+        <h3>
+            <?php
+                if ( empty($_GET['parking'])
+                && empty($_GET['vote'])){
+                    echo 'All our offers';
+                } else {
+                    echo 'Search result';
+                }
+            ?>
+        </h3>
+
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col" class="text-center">Parking</th>
-                    <th scope="col" class="text-center">Vote</th>
-                    <th scope="col" class="text-center">Downtown distance</th>
+                    <th scope="col" class="text-light bg-dark">Name</th>
+                    <th scope="col" class="text-light bg-dark">Description</th>
+                    <th scope="col" class="text-light bg-dark text-center">Parking</th>
+                    <th scope="col" class="text-light bg-dark text-center">Vote</th>
+                    <th scope="col" class="text-light bg-dark text-center">Downtown distance</th>
                 </tr>
             </thead>
             <tbody>
+
                 <?php foreach ($hotels as $singleHotel) { ?>
                     <tr>
                         <th scope="row">
