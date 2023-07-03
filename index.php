@@ -70,13 +70,18 @@
                         </td>
                         <td class="text-center">
                             <?php if ($singleHotel['parking'] === true) {
-                                echo '<i class="fa-solid fa-check"></i>';
+                                echo '<i class="fa-solid fa-check text-success"></i>';
                             } else {
-                                echo '<i class="fa-solid fa-xmark"></i>';
+                                echo '<i class="fa-solid fa-xmark text-danger"></i>';
                             } ?>
                         </td>
                         <td class="text-center">
-                            <?php echo $singleHotel['vote']; ?>
+                            <?php for ($i=0; $i < $singleHotel['vote']; $i++) { 
+                                echo '<i class="fa-solid fa-star text-warning"></i>';
+                            } for ($i=0; $i < 5-$singleHotel['vote'] ; $i++) { 
+                                echo '<i class="fa-regular fa-star"></i>';
+                            }
+                            ?>
                         </td>
                         <td class="text-center">
                             <?php echo $singleHotel['distance_to_center'] .' km'; ?>
