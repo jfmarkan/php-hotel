@@ -54,9 +54,9 @@
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
-                    <th scope="col text-center">Parking</th>
-                    <th scope="col">Vote</th>
-                    <th scope="col">Downtown distance</th>
+                    <th scope="col" class="text-center">Parking</th>
+                    <th scope="col" class="text-center">Vote</th>
+                    <th scope="col" class="text-center">Downtown distance</th>
                 </tr>
             </thead>
             <tbody>
