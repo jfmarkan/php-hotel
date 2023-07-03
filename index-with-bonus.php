@@ -55,14 +55,14 @@
         <form action="./index-with-bonus.php" method="GET" class="row mb-5 d-flex p-2">
             <div class="col-auto mx-2 align-self-center d-flex">
                 <div class="form-check me-3">
-                    <input class="form-check-input" type="radio" name="parking" id="parking" value="true">
-                    <label class="form-check-label" for="parking">
+                    <input class="form-check-input" type="radio" name="parking" id="parkingtrue" value="true">
+                    <label class="form-check-label" for="parkingtrue">
                         Has parking
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="parking" id="parking" value="false">
-                    <label class="form-check-label" for="parking">
+                    <input class="form-check-input" type="radio" name="parking" id="parkingfalse" value="false">
+                    <label class="form-check-label" for="parkingfalse">
                         Doesn't have parking
                     </label>
                 </div>
@@ -85,7 +85,7 @@
     <div class="container">
         <h3>
             <?php
-                if ( empty($hasParking)
+                if (empty($hasParking)
                 && empty($vote)){
                     echo 'All our offers';
                 } else {
@@ -106,7 +106,8 @@
             </thead>
             <tbody>
                 <?php if (empty($vote) && empty($hasParking)) {
-                        foreach ($hotels as $singleHotel) { ?>
+                        foreach ($hotels as $singleHotel) { 
+                ?>
                     <tr>
                         <th scope="row">
                             <?php echo $singleHotel['name']; ?>
@@ -134,40 +135,102 @@
                             <?php echo $singleHotel['distance_to_center'] .' km'; ?>
                         </td>
                     </tr>
-                <?php }} elseif ($hasParking != null || $vote != '') {
+                <?php }} elseif ($hasParking === null) {
                             foreach ($hotels as $singleHotel) {
-                                if ($singleHotel['vote'] >= $vote && $singleHotel['parking'] == $hasParking && $hasParking !=null){
-                    ?>
+                                if ($singleHotel['vote'] >= $vote){
+                ?>
+                        <tr>
+                        <th scope="row">
+                            <?php echo $singleHotel['name']; ?>
+                        </th>
+                        <td>
+                            <?php echo $singleHotel['description']; ?>
+                        </td>
+                        <td class="text-center">
+                            <?php if ($singleHotel['parking'] === true) {
+                                echo '<i class="fa-solid fa-check text-success"></i>';
+                            } else {
+                                echo '<i class="fa-solid fa-xmark text-danger"></i>';
+                            } ?>
+                        </td>
+                        <td class="text-center">
+                            <?php 
+                                for ($i=0; $i < $singleHotel['vote']; $i++) { 
+                                    echo '<i class="fa-solid fa-star text-warning"></i>';
+                                } for ($i=0; $i < 5-$singleHotel['vote'] ; $i++) { 
+                                    echo '<i class="fa-regular fa-star"></i>';
+                                }
+                            ?>
+                        </td>
+                        <td class="text-center">
+                            <?php echo $singleHotel['distance_to_center'] .' km'; ?>
+                        </td>
+                    </tr>
+                <?php }}} elseif ($vote === '') {
+                        foreach ($hotels as $singleHotel) {
+                            if ($singleHotel['parking'] == $hasParking){
+                ?>
                     <tr>
-                    <th scope="row">
-                        <?php echo $singleHotel['name']; ?>
-                    </th>
-                    <td>
-                        <?php echo $singleHotel['description']; ?>
-                    </td>
-                    <td class="text-center">
-                        <?php if ($singleHotel['parking'] === true) {
-                            echo '<i class="fa-solid fa-check text-success"></i>';
-                        } else {
-                            echo '<i class="fa-solid fa-xmark text-danger"></i>';
-                        } ?>
-                    </td>
-                    <td class="text-center">
-                        <?php 
-                            for ($i=0; $i < $singleHotel['vote']; $i++) { 
-                                echo '<i class="fa-solid fa-star text-warning"></i>';
-                            } for ($i=0; $i < 5-$singleHotel['vote'] ; $i++) { 
-                                echo '<i class="fa-regular fa-star"></i>';
-                            }
-                        ?>
-                    </td>
-                    <td class="text-center">
-                        <?php echo $singleHotel['distance_to_center'] .' km'; ?>
-                    </td>
-                </tr>
-                    <?php } } }
-                    var_dump($hasParking);
-                    ?>
+                        <th scope="row">
+                            <?php echo $singleHotel['name']; ?>
+                        </th>
+                        <td>
+                            <?php echo $singleHotel['description']; ?>
+                        </td>
+                        <td class="text-center">
+                            <?php if ($singleHotel['parking'] === true) {
+                                echo '<i class="fa-solid fa-check text-success"></i>';
+                            } else {
+                                echo '<i class="fa-solid fa-xmark text-danger"></i>';
+                            } ?>
+                        </td>
+                        <td class="text-center">
+                            <?php 
+                                for ($i=0; $i < $singleHotel['vote']; $i++) { 
+                                    echo '<i class="fa-solid fa-star text-warning"></i>';
+                                } for ($i=0; $i < 5-$singleHotel['vote'] ; $i++) { 
+                                    echo '<i class="fa-regular fa-star"></i>';
+                                }
+                            ?>
+                        </td>
+                        <td class="text-center">
+                            <?php echo $singleHotel['distance_to_center'] .' km'; ?>
+                        </td>
+                    </tr>
+                <?php }}} elseif ($hasParking != null && $vote != '') {
+                            foreach ($hotels as $singleHotel) {
+                                if ($singleHotel['vote'] >= $vote && $singleHotel['parking'] == $hasParking){
+                ?>
+                        <tr>
+                        <th scope="row">
+                            <?php echo $singleHotel['name']; ?>
+                        </th>
+                        <td>
+                            <?php echo $singleHotel['description']; ?>
+                        </td>
+                        <td class="text-center">
+                            <?php if ($singleHotel['parking'] === true) {
+                                echo '<i class="fa-solid fa-check text-success"></i>';
+                            } else {
+                                echo '<i class="fa-solid fa-xmark text-danger"></i>';
+                            } ?>
+                        </td>
+                        <td class="text-center">
+                            <?php 
+                                for ($i=0; $i < $singleHotel['vote']; $i++) { 
+                                    echo '<i class="fa-solid fa-star text-warning"></i>';
+                                } for ($i=0; $i < 5-$singleHotel['vote'] ; $i++) { 
+                                    echo '<i class="fa-regular fa-star"></i>';
+                                }
+                            ?>
+                        </td>
+                        <td class="text-center">
+                            <?php echo $singleHotel['distance_to_center'] .' km'; ?>
+                        </td>
+                    </tr>
+
+
+                <?php } } } ?>
             </tbody>
         </table>
     </div>
