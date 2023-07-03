@@ -36,10 +36,6 @@
             'distance_to_center' => 50
         ],
     ];
-
-    $hasParking = $_GET['parking'];
-    $vote = $_GET['vote'];
-    $hotelSearch = array();
 ?>
 
 <!DOCTYPE html>
